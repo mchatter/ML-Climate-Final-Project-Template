@@ -13,3 +13,22 @@ DOI=10.3389/fenvs.2020.00077
 The authors only predict wheat-sown areas in Afghanistan for the year 2017. A visualization of their work can be found [here](http://geoapps.icimod.org/afwheat/). Since interpreting and implementing their methodology for all years would be a time-consuming task (especially given that we are only in the first stage of the overall project and might not necessarily have an accurate forecast of how much time the remaining stages will take), I have emailed Varun Tiwari and Mir Matin at ICIMOD to ask if the code for their project could be made available to me as a reference point. If they do not respond, and if I cannot find any provincial survey day in the next few days, I will consult with the professor and TA and decide whether to move ahead with only the poppy yields predictive model (a pretty significant task in and of itself, given the political instability in the region), or whether to replicate Tiwari et al's methodology in earnest.
 
 Further data gathering steps include local heat mapping, rainfall index, and soil composition data from the World Bank Climate Knowledge datasets, as well as numerical scores for rule of law preservation and other political instability indicators for the region from the Transparency Index and World Bank.
+
+
+Week 2: Climatological Data Gathering
+
+This week I sourced and added Mean Temperature and Precipitation data for all provinces. I got this data primarily from the World Bank Climate Knowledge [Data Portal](https://climateknowledgeportal.worldbank.org/download-data). This data was compiled by the Climatic Research Unit (CRU) of University of East Anglia. I only got observed data and did not any predicted numbers for 2022 largely because I wanted to reduce the downstream opacity in my model inputs. In order to make my work replicable, I'm hoping to stick mainly to real-world observations. As we have observed from class, climatological data is most accurate in the short-term, and rapidly loses accuracy when doing long forecasts.
+
+Week 3: Incumbent Soil Conditions
+
+The soil data took me a little bit of time to clean up and standardize, since I'm getting most of it from previously commissioned agricultural studies and reports. My main data source was the Afghanistan Soil Atlas report compiled in 2020 by the FAO or the Food and Agriculture Organization of the United Nations. Fields for each province include Soil type, Area, Sand %, Clay %, pH score, Total Nitrogen, Available Phosphorus, Exchangeable Potassium, Available Sulphur, Electrical Conductivity in a 1:2.5 soil:water solution, Calcium Carbonate content. I OCR-ed specific pages from the report, then manually compiled the CSVs from the TXT exports of the OCR-ed pages.
+
+Overall Update:
+T'm running up against some data-gathering challenges for getting province-by-province data on total number of wheat-sown hectares for the past 10 years, but am in a pretty good position in terms of data-gathering on all the other aspects of the project (province-by-province opium poppy-sown hectares, soil sample composition, rainfall, and temperature data). I'm seeing two ways forward:
+
+1. Push ahead on trying to get data for wheat-sown hectares for the region with a satellite image-classification model using a singular reference paper (Tiwari et al, 2020), but risk not having enough time to focus on actual crop-yield predictions.
+
+2. Focus on thoroughly building out the crop-yield prediction models for opium poppy only (eg. experiment with finding optimal neural network architecture, include additional features to account for regional political instability metrics, and build out a prediction testing mechanism using satellite products a la Kim et al, 2019).
+
+I'm leaning towards the second avenue both in terms of personal interest, and because I think it would enable me to deliver the most "complete" project by the end of the semester.
+
