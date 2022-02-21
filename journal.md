@@ -34,3 +34,22 @@ T'm running up against some data-gathering challenges for getting province-by-pr
 
 I'm leaning towards the second avenue both in terms of personal interest, and because I think it would enable me to deliver the most "complete" project by the end of the semester.
 
+Week 4: Feature Engineering
+
+Part 1: Get the CSVs into DataFrames
+
+Opium Sown: Have number of sown hectares for each district in each province for each year between 2010 - 2020, except for part of Bamyan, Day Kundi, Farah, Faryab, Ghazni, and Ghor, where we have 2008-2018 data. Pending further investigation, we will code these provinces with zeros. All fields marked '-' or 'p-f' (poppy-free) in the CSV are replaced by zeros. Data is of numerical type. All NaN values are set to zero.
+
+Soil Data: Dropped the WRB Codes column because it contained numerous inaccuracies as an artefact of the scraping process and because it was collinear with the Soil Type column. Soil Type column was categorical and has been turned into dummy variables with one hot encoding. All other data was of numerical type. Province name is broadcast for each row of soil sample information. All fields marked (-)(-) in the CSV are replaced by zeros. Dataframe only contains the estimates of sown areas. All margin of error information is removed from the dataframe. All NaN values are set to zero.
+
+Temperature and Precipitation Data: All data is transposed such that the years are columns and months are rows. Province name is broadcast for each row of climatological information. All NaN values are set to zero. Data is of numerical type.
+
+Overall Update: The verdict is in. For the remainder of the semester, I will be focusing on thoroughly building out the crop-yield prediction models for opium poppy only (eg. experiment with finding optimal neural network architecture, include additional features to account for regional political instability metrics, and build out a prediction testing mechanism using satellite products a la Kim et al, 2019).
+
+By next week, my goal is to have a random forest model running. This shall serve as my benchmark model. Before I set up the model, I need to be clearer about what my prediction goal is. Do I want to predict the most optimal regions for sowing poppy? Or do I want to predict numerical yields or sown areas for next year? One is a categorization problem and the other is a numerical regression problem. 
+
+Suggestions to Consider:
+
+Prof. Kucukelbir: "You may want to consider building a hierarchical prediction model? In any case, I would recommend that you lay out all of the properties of your data and your assumptions before jumping ahead with a neural network based approach — there are many other, likely better/more interpretable/Bayesian, options available to you if you are not working with image data."
+
+Nicolas Beltran: "Given the argument about data division and the fact that you'd be using random forests, I think that your approach at the moment of trying random forests and then neural networks seem reasonable. I would also discourage you go for the Bayesian approach as a first model because most people usually have a better intuition with neural networks/random-forests/[insert another traditional ml model] and from what I've read from your journal it seems like the data collection that you've had to do has not been easy and the time that could be spent learning about new Bayesian methods might be better spent on getting additional predictors."
