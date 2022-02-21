@@ -44,7 +44,7 @@ Soil Data: Dropped the WRB Codes column because it contained numerous inaccuraci
 
 Temperature and Precipitation Data: All data is transposed such that the years are columns and months are rows. Province name is broadcast for each row of climatological information. All NaN values are set to zero. Data is of numerical type.
 
-Overall Update: The verdict is in. For the remainder of the semester, I will be focusing on thoroughly building out the crop-yield prediction models for opium poppy only (eg. experiment with finding optimal neural network architecture, include additional features to account for regional political instability metrics, and build out a prediction testing mechanism using satellite products a la Kim et al, 2019).
+Overall Update: The verdict is in. For the remainder of the semester, I will be focusing on thoroughly building out the crop-yield prediction models for opium poppy only (eg. experiment with finding optimal neural network architecture, include additional features to account for regional political instability metrics, and possibly build out a prediction testing mechanism using satellite products a la [Kim et al, 2019](https://www.mdpi.com/2220-9964/8/5/240)).
 
 By next week, my goal is to have a random forest model running. This shall serve as my benchmark model. Before I set up the model, I need to be clearer about what my prediction goal is. Do I want to predict the most optimal regions for sowing poppy? Or do I want to predict numerical yields or sown areas for next year? One is a categorization problem and the other is a numerical regression problem. 
 
