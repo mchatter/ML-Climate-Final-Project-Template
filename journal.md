@@ -53,3 +53,7 @@ Suggestions to Consider:
 Prof. Kucukelbir: "You may want to consider building a hierarchical prediction model? In any case, I would recommend that you lay out all of the properties of your data and your assumptions before jumping ahead with a neural network based approach — there are many other, likely better/more interpretable/Bayesian, options available to you if you are not working with image data."
 
 Nicolas Beltran: "Given the argument about data division and the fact that you'd be using random forests, I think that your approach at the moment of trying random forests and then neural networks seem reasonable. I would also discourage you go for the Bayesian approach as a first model because most people usually have a better intuition with neural networks/random-forests/[insert another traditional ml model] and from what I've read from your journal it seems like the data collection that you've had to do has not been easy and the time that could be spent learning about new Bayesian methods might be better spent on getting additional predictors."
+
+## 2022-03-07 check in: alp
+
+Looking good. Would stick with Nicolas' recommendation to throw something like a RF at the problem. Encourage you to keep this journal up to date weekly.
