@@ -57,3 +57,33 @@ Nicolas Beltran: "Given the argument about data division and the fact that you'd
 ## 2022-03-07 check in: alp
 
 Looking good. Would stick with Nicolas' recommendation to throw something like a RF at the problem. Encourage you to keep this journal up to date weekly.
+
+## 2022-03-08
+
+I was making all my observations and comments in-line in my Python notebook, and so forgot to update my actual research journal - sorry! Here is a quick update on what happened since the Feature Engineering update:
+
+I need to add a BIG CAVEAT FOR SOIL DATA. We do not unique soil data for all 34 provinces. We only have soil data for 9 provinces - some of the most populuos and biggest in the nation by area, but certainly not complete. I previously thought to to make up for any missing data by running an image-to-numbers script to obtain features from country-wide heatmaps from 2011 (source: Afghan Geodesy and Cartography Head Office, conforms to United Nations Afghanistan Regions 3958.1 R3, June 2011) showing, among other factors, topsoil texture distribution across the country. But I realized that the features for the 9 provinces with granular soil do not map well to the country-wide features presented in the heat maps in the FAO report (no other reliable data sources for soil quality in the region are available to the best of my knowledge). So I used the maps and qualitative assessments from the UNODC Opium Yields reports to subjectively broadcast the soil data from each of the 9 provinces to the closest provinces whose topsoil texture distributions closely resemble each others per the 2011 maps. To get a single reading for each province, we will consider the area of each soil type in each province as the "weight" vector and multiply it to the respective chemical measurement of that soil type, and take the sum of each multiplied column, kind of like a weighted average. And so we will have the same set of soil quality metrics for each province. But these broadcasted readings should be subsituted with unique soil sample results as soon as the data becomes available.
+
+Part of the reason I feel comfortable proceeding is that the lack of soil quality data is a rather country-specific problem and can be solved given time. So I'm trying to not let perfect be the enemy of good enough for a proof-of-concept model.
+
+
+Random Forest Benchmark Regressor:
+
+For each province, for each year, the X dataset is the local soil features, and the mean temperature and mean precipitation in the 12 months of the precending year, while the Y is the number of hectares sown in the current year. We have climatological data from 2010 through 2020 (11 years). We will use 34 provinces * 10 years from 2010 to 2019 = 340 datapoints in total for training and testing. Once we have fine-tuned our benchmark, we will use the 2020 climatological features (and existing soil featuers) to predict the number of hectares of opium sown in 2021, and compare our prediction against the UNODC report that will come out later in the year.
+
+We will train the regressor on data from 27 (or roughly 80%) of the 34 provinces, and test the regressor on data from the remaining 7 provinces.
+
+Results: Poor. My R^2 evaluation is negative! That's worse than drawing the equivalent of a horizontal line through this high-dimension data. 
+
+Well, recognizing that predicting an exact number of hectares sown is remarkably difficult, and also not quite necessary per our original intention, I'm going to try one more thing - categorize the provinces as high, medium, or low yield based on which percentile they fall into, and try to run a categorical random forest model again to see if I get any better results. I will no doubt run into unbalanced classes and will need to fix my sampling accordingly.
+
+
+
+
+Random Forest Benchmark Regressor
+
+For each province, for each year, the X dataset is the local soil features, and the mean temperature and mean precipitation in the 12 months of the precending year, while the Y is the number of hectares sown in the current year. We have climatological data from 2010 through 2020 (11 years). We will use 34 provinces * 10 years from 2010 to 2019 = 340 datapoints in total for training and testing. Once we have fine-tuned our benchmark, we will use the 2020 climatological features (and existing soil featuers) to predict the number of hectares of opium sown in 2021, and compare our prediction against the UNODC report that will come out later in the year.
+
+We will train the regressor on data from 27 (or roughly 80%) of the 34 provinces, and test the regressor on data from the remaining 7 provinces.
+
+
