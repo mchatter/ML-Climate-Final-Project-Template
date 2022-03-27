@@ -71,19 +71,24 @@ Random Forest Benchmark Regressor:
 
 For each province, for each year, the X dataset is the local soil features, and the mean temperature and mean precipitation in the 12 months of the precending year, while the Y is the number of hectares sown in the current year. We have climatological data from 2010 through 2020 (11 years). We will use 34 provinces * 10 years from 2010 to 2019 = 340 datapoints in total for training and testing. Once we have fine-tuned our benchmark, we will use the 2020 climatological features (and existing soil featuers) to predict the number of hectares of opium sown in 2021, and compare our prediction against the UNODC report that will come out later in the year.
 
-We will train the regressor on data from 27 (or roughly 80%) of the 34 provinces, and test the regressor on data from the remaining 7 provinces.
-
 Results: Poor. My R^2 evaluation is negative! That's worse than drawing the equivalent of a horizontal line through this high-dimension data. 
 
 Well, recognizing that predicting an exact number of hectares sown is remarkably difficult, and also not quite necessary per our original intention, I'm going to try one more thing - categorize the provinces as high, medium, or low yield based on which percentile they fall into, and try to run a categorical random forest model again to see if I get any better results. I will no doubt run into unbalanced classes and will need to fix my sampling accordingly.
 
 
+## 2022-03-27
 
+Added intercept term. Updated datasets for random forest (RF) regression model. Switched to using the statsmodels.api library. The soil chemical composition features are now normalized by the area of the base province. 
 
-Random Forest Benchmark Regressor
+Achieved 13.7% adjusted R^2 (better than negative!). 
 
-For each province, for each year, the X dataset is the local soil features, and the mean temperature and mean precipitation in the 12 months of the precending year, while the Y is the number of hectares sown in the current year. We have climatological data from 2010 through 2020 (11 years). We will use 34 provinces * 10 years from 2010 to 2019 = 340 datapoints in total for training and testing. Once we have fine-tuned our benchmark, we will use the 2020 climatological features (and existing soil featuers) to predict the number of hectares of opium sown in 2021, and compare our prediction against the UNODC report that will come out later in the year.
+I also tried to figure out which independent variables are important by running the regression minus one column at a time and looking at the drop in adjusted R^2 value, if any which would indicate that the dropped column was explaining at least some percentage of the variation in the Y variable (number of hectares of opium sown). Conclusions pending results interpretation.
 
-We will train the regressor on data from 27 (or roughly 80%) of the 34 provinces, and test the regressor on data from the remaining 7 provinces.
+Trained an RF classifier from sklearn on data from 27 (or roughly 80%) of the 34 provinces, and tested the classifier accuracy on data from the remaining 7 provinces. Used the same set of independent variables for X as was used in the regressor, but created indicator variable for whether poppy was sown in a province in a particular year for the Y variable. 
+
+Achieved 68.6% accuracy. 
+
+Next up: (1) Make sure classes are balanced in the training and test sets. (2) Set up and use a CNN classifier. Will likely need to use transfer learning.
+
 
 
