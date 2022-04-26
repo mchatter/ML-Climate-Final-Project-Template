@@ -90,5 +90,33 @@ Achieved 68.6% accuracy.
 
 Next up: (1) Make sure classes are balanced in the training and test sets. (2) Set up and use a CNN classifier. Will likely need to use transfer learning.
 
+## 2022-04-15
+
+I added five new features to account for political instability. These are worldwide governance indicators at the national level over the past 10 years, broadcast across all the provinces.
+
+To address the class Imbalance issue, I upsampled the positive class (poppy-having data-points) in the training set, but not in the test-set, since there are far fewer poppy-having provinces than poppy-free regions in real life.
+
+I also trained and ran an SVM Classifier.
+
+Results from all three predictive models:
+
+![image](https://user-images.githubusercontent.com/30819781/165384701-2b41d1d9-3b2a-41e0-ab76-ac775738172a.png)
+
+None of the variables in the regression model were significant. I think this is attributable to two things: 
+
+(1) data quality / scarcity: I had to broadcast the soil data from 9 provinces to the geographically closest provinces whose topsoil texture distributions most resembled the nucleus province per 2011 soil-maps. Plus, to get one normalized weighted average reading per soil feature for each province, I did the following: 
+
+Sum(Area covered by a soil type in a province * Percent presence of that soil type) / Area of base province.
+
+I also had to use the national-level precipitation, temperature, and governance indicators for each province.
+
+(2) feature set does not fully capture reality: where climatological and soil data might be enough to predict crop yields when the crop itself does not contribute to the production of a dangerous narcotic, and the political situation in the country is stable, neither holds true for the opium poppy crop we're looking at. Hence, I think even the addition of the national-level political stability indicators do not fully capture the various factors affecting decision-making for poppy growers.
+
+Still, recognizing that predicting an exact number of hectares sown is remarkably difficult for the number of data points we have, and also not really necessary per our problem statement, the relative success of the ML classification models are quite promising. 
+
+The Random Forest Classifier performs better on average than SVM, but both are far from perfect. Repeated runs shows that the Random Forest Classifier has 80% accuracy on average and the SVM Classifier has 71.4% accuracy on average. But the F-1 Score for the SVM Classifier is higher at 56.5%, compared to 41.6%. The F-1 score is important because of the underrepresentation of the positive class (poppy-having provinces) in real life, which means our classifier should be able to correctly recall all the real positive cases in the test set to be used as an effective prediction tool. From this perspective, the SVM Classifier has the edge.
+
+
+
 
 
